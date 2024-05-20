@@ -1,22 +1,31 @@
 import React from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Platform, StyleSheet, Text, View, FlatList } from "react-native";
+import {
+  Dimensions,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+} from "react-native";
 import { projectsRoutes } from "../../lib/project-routes";
+import { Link } from "expo-router";
+
+const { width: screenWidth } = Dimensions.get("window");
 
 export default function HomePage() {
   const renderItem = ({ item }) => (
-    <View style={styles.projectItem}>
-      <View>
-        <Text style={styles.projectTitle}>{item.title}</Text>
-        <Text style={styles.projectDescription}>{item.description}</Text>
+    <Link href={"/"} style={styles.projectItem}>
+      <View style={styles.projectContent}>
+        <View style={styles.textContainer}>
+          <Text style={styles.projectTitle}>{item.title}</Text>
+          <Text style={styles.projectDescription}>{item.description}</Text>
+        </View>
+        <View style={styles.iconContainer}>
+          <FontAwesome name="chevron-right" size={16} color="#666666" />
+        </View>
       </View>
-      <FontAwesome
-        style={{ marginRight: 20 }}
-        name="chevron-right"
-        size={16}
-        color="#666666"
-      />
-    </View>
+    </Link>
   );
 
   return (
@@ -67,6 +76,7 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
   },
   projectItem: {
+    width: "100%",
     padding: 10,
     paddingHorizontal: 0,
     borderBottomWidth: 1,
@@ -74,6 +84,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+  },
+  projectContent: {
+    width: Platform.OS === "web" ? "100%" : screenWidth - 56,
+    // width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  textContainer: {
+    flex: 1,
+  },
+  iconContainer: {
+    paddingHorizontal: 10,
   },
   projectTitle: {
     fontSize: 18,
