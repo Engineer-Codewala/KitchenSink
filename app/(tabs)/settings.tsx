@@ -1,8 +1,15 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 
 export default function SettingsPage() {
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        (Platform.OS === "android" || Platform.OS === "ios") && {
+          paddingTop: 80,
+        },
+      ]}
+    >
       <View style={styles.main}>
         <Text style={styles.title}>Settings</Text>
         {/* <Text style={styles.subtitle}> */}
@@ -18,7 +25,6 @@ const styles = StyleSheet.create({
     flex: 1,
     // alignItems: "center",
     padding: 24,
-    paddingTop: 80,
   },
   main: {
     flex: 1,
