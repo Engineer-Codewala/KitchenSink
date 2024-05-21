@@ -8,17 +8,19 @@ import {
   View,
   FlatList,
 } from "react-native";
-import { projectsRoutes } from "../../lib/project-routes";
+import { projectsRoutes } from "../../../lib/project-routes";
 import { Link } from "expo-router";
 
 const { width: screenWidth } = Dimensions.get("window");
 
 export default function HomePage() {
-  const renderItem = ({ item }) => (
-    <Link href={"/"} style={styles.projectItem}>
+  const renderItem = ({ item, index }: any) => (
+    <Link href={`/${item.id}`} style={styles.projectItem}>
       <View style={styles.projectContent}>
         <View style={styles.textContainer}>
-          <Text style={styles.projectTitle}>{item.title}</Text>
+          <Text style={styles.projectTitle}>
+            {`${index + 1}. ${item.title}`}
+          </Text>
           <Text style={styles.projectDescription}>{item.description}</Text>
         </View>
         <View style={styles.iconContainer}>
